@@ -8,6 +8,7 @@ using NerdStore.Identity.API.Extensions;
 using NerdStore.Identity.API.ViewModels;
 using System;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -95,6 +96,7 @@ namespace NerdStore.Identity.API.Controllers.v1
         private async Task<LoginResponseViewModel> GenerateJwt(string userEmail)
         {
             var user = await _userManager.FindByEmailAsync(userEmail);
+            var claims = await _userManager.GetClaimsAsync(user);
             var identityClaims = await GetUserClaimsAndRoles(user);
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_tokenSettings.Secret);
@@ -115,7 +117,8 @@ namespace NerdStore.Identity.API.Controllers.v1
                 {
                     Id = user.Id,
                     Name = user.UserName,
-                    Email = user.Email
+                    Email = user.Email,
+                    Claims = claims.Select(c => new UserClaim { Type = c.Type, Value = c.Value })
                 }
             };
         }
