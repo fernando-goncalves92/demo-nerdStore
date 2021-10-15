@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using NerdStore.Identity.API.Authentication;
 using NerdStore.Identity.API.Data;
 
 namespace NerdStore.Identity.API.Configurations
@@ -18,9 +20,18 @@ namespace NerdStore.Identity.API.Configurations
             services.AddDefaultIdentity<IdentityUser>()
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddErrorDescriber<IdentityPortugueseMessages>()
                 .AddDefaultTokenProviders();
 
             return services;
+        }
+
+        public static IApplicationBuilder UseIdentityConfig(this IApplicationBuilder app)
+        {
+            app.UseAuthentication();
+            app.UseAuthorization();
+
+            return app;
         }
     }
 }
