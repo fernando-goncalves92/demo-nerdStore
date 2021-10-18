@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 namespace NerdStore.Identity.API.Controllers.v1
 {
     [ApiVersion("1.0")]
-    [Route("api/v{version:apiVersion}/[controller]")]    
+    [Route("api/v{version:apiVersion}/authentication")]    
     public class AuthenticationController : MainController
     {
         private readonly SignInManager<IdentityUser> _signInManager;
