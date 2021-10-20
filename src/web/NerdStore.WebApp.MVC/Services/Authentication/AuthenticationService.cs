@@ -1,12 +1,11 @@
 ﻿using NerdStore.WebApp.MVC.Models.User;
-using System.Text.Json;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Text;
+using NerdStore.WebApp.MVC.Models;
 
 namespace NerdStore.WebApp.MVC.Services.Authentication
 {
-    public class AuthenticationService : IAuthenticationService
+    public class AuthenticationService : ServiceBase, IAuthenticationService
     {
         private readonly HttpClient _httpClient;
 
@@ -17,25 +16,32 @@ namespace NerdStore.WebApp.MVC.Services.Authentication
 
         public async Task<UserLoginResponse> CreateAccount(UserRegister user)
         {   
-            var response = await _httpClient.PostAsync("https://localhost:44301/api/v1/authentication/create-account", CreateSringContent(user));
+            var response = await _httpClient.PostAsync("https://localhost:44301/api/v1/authentication/create-account", ConvertToStringContent(user));
+            
+            if (!VerifyResponseErrors(response))
+            {
+                return new UserLoginResponse
+                {
+                    ResponseResult = await GetResponse<ResponseResult>(response)
+                };
+            }
 
-            return JsonSerializer.Deserialize<UserLoginResponse>(
-                await response.Content.ReadAsStringAsync(),
-                new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+            return await GetResponse<UserLoginResponse>(response);
         }
 
         public async Task<UserLoginResponse> Login(UserLogin user)
         {
-            var response = await _httpClient.PostAsync("https://localhost:44301/api/v1/authentication/login", CreateSringContent(user));
+            var response = await _httpClient.PostAsync("https://localhost:44301/api/v1/authentication/login", ConvertToStringContent(user));
 
-            return JsonSerializer.Deserialize<UserLoginResponse>(
-                await response.Content.ReadAsStringAsync(), 
-                new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-        }
+            if (!VerifyResponseErrors(response))
+            {
+                return new UserLoginResponse
+                {
+                    ResponseResult = await GetResponse<ResponseResult>(response)
+                };
+            }
 
-        private StringContent CreateSringContent<T>(T obj)
-        {
-            return new StringContent(JsonSerializer.Serialize(obj), Encoding.UTF8, "application/json");
+            return await GetResponse<UserLoginResponse>(response);
         }
     }
 }

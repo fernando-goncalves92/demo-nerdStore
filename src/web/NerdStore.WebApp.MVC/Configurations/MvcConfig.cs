@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using NerdStore.WebApp.MVC.Middlewares;
 
 namespace NerdStore.WebApp.MVC.Configurations
 {
@@ -16,20 +17,26 @@ namespace NerdStore.WebApp.MVC.Configurations
 
         public static IApplicationBuilder UseMvcConfig(this IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-                app.UseHsts();
-            }
+            //if (env.IsDevelopment())
+            //{
+            //    app.UseDeveloperExceptionPage();
+            //}
+            //else
+            //{
+            //    app.UseExceptionHandler("/error/500");
+            //    app.UseStatusCodePagesWithRedirects("/error/{0}");
+            //    app.UseHsts();
+            //}
+
+            app.UseExceptionHandler("/error/500");
+            app.UseStatusCodePagesWithRedirects("/error/{0}");
+            app.UseHsts();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
             app.UseIdentityConfig();
+            app.UseMiddleware<ExceptionMiddleware>();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

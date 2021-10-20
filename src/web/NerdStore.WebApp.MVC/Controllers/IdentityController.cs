@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace NerdStore.WebApp.MVC.Controllers
 {
-    public class IdentityController : Controller
+    public class IdentityController : MainController
     {
         private readonly Auth.IAuthenticationService _authenticationService;
         private readonly ILogger<IdentityController> _logger;
@@ -37,8 +37,8 @@ namespace NerdStore.WebApp.MVC.Controllers
 
             var response = await _authenticationService.CreateAccount(user);
 
-            //if (false) 
-            //    return View(user);
+            if (ExistsResponseErrors(response.ResponseResult))
+                return View(user);
 
             await LoginApp(response);
 
@@ -48,7 +48,7 @@ namespace NerdStore.WebApp.MVC.Controllers
         [HttpGet("login")]
         public IActionResult Login(string returnUrl = null)
         {
-            //ViewData["ReturnUrl"] = returnUrl;
+            ViewData["ReturnUrl"] = returnUrl;
             
             return View();
         }
@@ -63,17 +63,24 @@ namespace NerdStore.WebApp.MVC.Controllers
 
             var response = await _authenticationService.Login(user);
 
-            //if (false)
-            //    return View(user);
+            if (ExistsResponseErrors(response.ResponseResult))
+                return View(user);
 
             await LoginApp(response);
 
-            return RedirectToAction("Index", "Home");
+            if (string.IsNullOrEmpty(returnUrl))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            return LocalRedirect(returnUrl);
         }
 
         [HttpGet("logout")]
         public async Task<IActionResult> Logout()
         {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
             return RedirectToAction("Index", "Home");
         }
 
