@@ -1,7 +1,10 @@
-﻿using NerdStore.WebApp.MVC.Models.User;
+﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Options;
 using NerdStore.WebApp.MVC.Models;
+using NerdStore.WebApp.MVC.Facilities;
+using NerdStore.WebApp.MVC.Models.User;
 
 namespace NerdStore.WebApp.MVC.Services.Authentication
 {
@@ -9,14 +12,15 @@ namespace NerdStore.WebApp.MVC.Services.Authentication
     {
         private readonly HttpClient _httpClient;
 
-        public AuthenticationService(HttpClient httpClient)
+        public AuthenticationService(HttpClient httpClient, IOptions<UrlAccess> options)
         {
             _httpClient = httpClient;
+            _httpClient.BaseAddress = new Uri(options.Value.AuthenticationUrl);
         }
 
         public async Task<UserLoginResponse> CreateAccount(UserRegister user)
         {   
-            var response = await _httpClient.PostAsync("https://localhost:44301/api/v1/authentication/create-account", ConvertToStringContent(user));
+            var response = await _httpClient.PostAsync("/api/v1/authentication/create-account", ConvertToStringContent(user));
             
             if (!VerifyResponseErrors(response))
             {
@@ -31,7 +35,7 @@ namespace NerdStore.WebApp.MVC.Services.Authentication
 
         public async Task<UserLoginResponse> Login(UserLogin user)
         {
-            var response = await _httpClient.PostAsync("https://localhost:44301/api/v1/authentication/login", ConvertToStringContent(user));
+            var response = await _httpClient.PostAsync("/api/v1/authentication/login", ConvertToStringContent(user));
 
             if (!VerifyResponseErrors(response))
             {

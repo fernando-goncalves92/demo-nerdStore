@@ -1,16 +1,20 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using NerdStore.WebApp.MVC.Facilities;
 using NerdStore.WebApp.MVC.Middlewares;
 
 namespace NerdStore.WebApp.MVC.Configurations
 {
     public static class MvcConfig
     {
-        public static IServiceCollection AddMvcConfig(this IServiceCollection services)
+        public static IServiceCollection AddMvcConfig(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddControllersWithViews();
+
+            services.Configure<UrlAccess>(configuration);
 
             return services;
         }
