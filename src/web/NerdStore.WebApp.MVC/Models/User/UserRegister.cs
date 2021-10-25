@@ -1,4 +1,3 @@
-using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -6,6 +5,10 @@ namespace NerdStore.WebApp.MVC.Models.User
 {
     public class UserRegister
     {
+        [Required(ErrorMessage = "O campo {0} é obrigatório")]
+        [DisplayName("Nome Completo")]
+        public string Name { get; set; }
+
         [Required(ErrorMessage = "O campo {0} é obrigatório")]
         [EmailAddress(ErrorMessage = "O campo {0} está em formato inválido")]
         [Display(Name = "E-mail")]

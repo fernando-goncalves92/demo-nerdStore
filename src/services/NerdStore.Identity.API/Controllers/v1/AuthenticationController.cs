@@ -44,7 +44,7 @@ namespace NerdStore.Identity.API.Controllers.v1
 
             var user = new IdentityUser
             {
-                UserName = registerUserViewModel.Email,
+                UserName = registerUserViewModel.Name,
                 Email = registerUserViewModel.Email,
                 EmailConfirmed = true
             };
