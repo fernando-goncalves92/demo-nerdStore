@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NerdStore.WebAPI.Core.Jwt;
 
-namespace NerdStore.Identity.API.Configurations
+namespace NerdStore.Catalog.API.Configurations
 {
     public static class ApiConfig
     {
@@ -33,19 +33,11 @@ namespace NerdStore.Identity.API.Configurations
 
             services.AddCors(options =>
             {
-                options.AddPolicy("Development", 
-                    builder => 
-                        builder
-                            .AllowAnyMethod()
-                            .AllowAnyHeader()
-                            .AllowCredentials());
-
-                options.AddPolicy("Production",
+                options.AddPolicy("Free",
                     builder =>
                         builder
-                            .WithMethods("GET")
-                            .WithOrigins("http://localhost:5001")
-                            .SetIsOriginAllowedToAllowWildcardSubdomains()
+                            .AllowAnyOrigin()
+                            .AllowAnyMethod()
                             .AllowAnyHeader());
             });
 
@@ -61,6 +53,7 @@ namespace NerdStore.Identity.API.Configurations
 
             app.UseHttpsRedirection();
             app.UseRouting();
+            app.UseCors("Free");
             app.UseAuthenticationJwt();
             app.UseEndpoints(endpoints =>
             {

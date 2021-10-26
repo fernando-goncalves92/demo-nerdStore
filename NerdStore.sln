@@ -13,15 +13,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{D751B453-B14
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identity", "Identity", "{9E6FE68C-5468-4AE3-B2F3-122420291C4D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NerdStore.Identity.API", "src\services\NerdStore.Identity.API\NerdStore.Identity.API.csproj", "{8FFDAE33-8B6B-4756-8137-0A643881B1BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NerdStore.Identity.API", "src\services\NerdStore.Identity.API\NerdStore.Identity.API.csproj", "{8FFDAE33-8B6B-4756-8137-0A643881B1BE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MVC", "MVC", "{9447AB51-1BFA-47C4-B601-078477E38329}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NerdStore.WebApp.MVC", "src\web\NerdStore.WebApp.MVC\NerdStore.WebApp.MVC.csproj", "{75C0B471-6518-44D7-9F80-86126ED39C1C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NerdStore.WebApp.MVC", "src\web\NerdStore.WebApp.MVC\NerdStore.WebApp.MVC.csproj", "{75C0B471-6518-44D7-9F80-86126ED39C1C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{66036AB6-B376-43E0-B9FE-5F3E2E086D1C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NerdStore.Core", "src\building blocks\NerdStore.Core\NerdStore.Core.csproj", "{3E709E20-6280-4004-B924-5C80BEBA2D15}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NerdStore.Core", "src\building blocks\NerdStore.Core\NerdStore.Core.csproj", "{3E709E20-6280-4004-B924-5C80BEBA2D15}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Payment", "Payment", "{5A287E55-3066-49B3-8120-D79AF4F0799C}"
 EndProject
@@ -33,15 +33,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Catalog", "Catalog", "{D7FB
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ShoppingCart", "ShoppingCart", "{9C92EFEF-65D7-4AAD-990A-9E38B407194D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NerdStore.Catalog.API", "src\services\NerdStore.Catalog.API\NerdStore.Catalog.API.csproj", "{588238AC-2BAF-4385-857A-E8E744A7BF1C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NerdStore.Catalog.API", "src\services\NerdStore.Catalog.API\NerdStore.Catalog.API.csproj", "{588238AC-2BAF-4385-857A-E8E744A7BF1C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NerdStore.Customer.API", "src\services\NerdStore.Customer.API\NerdStore.Customer.API.csproj", "{DD3690F8-7DAD-416F-88BA-DBFE22AFBD16}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NerdStore.Customer.API", "src\services\NerdStore.Customer.API\NerdStore.Customer.API.csproj", "{DD3690F8-7DAD-416F-88BA-DBFE22AFBD16}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NerdStore.Order.API", "src\services\NerdStore.Order.API\NerdStore.Order.API.csproj", "{F7A237DF-445F-4662-8CEA-DEEDD62814A5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NerdStore.Order.API", "src\services\NerdStore.Order.API\NerdStore.Order.API.csproj", "{F7A237DF-445F-4662-8CEA-DEEDD62814A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NerdStore.Payment.API", "src\services\NerdStore.Payment.API\NerdStore.Payment.API.csproj", "{D5E5A956-B759-4F8E-BBEC-1E9916336252}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NerdStore.Payment.API", "src\services\NerdStore.Payment.API\NerdStore.Payment.API.csproj", "{D5E5A956-B759-4F8E-BBEC-1E9916336252}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NerdStore.ShoppingCart.API", "src\services\NerdStore.ShoppingCart.API\NerdStore.ShoppingCart.API.csproj", "{762BE16A-52CB-4AF9-B2B7-80E5409B6780}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NerdStore.ShoppingCart.API", "src\services\NerdStore.ShoppingCart.API\NerdStore.ShoppingCart.API.csproj", "{762BE16A-52CB-4AF9-B2B7-80E5409B6780}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NerdStore.WebAPI.Core", "NerdStore.WebAPI.Core\NerdStore.WebAPI.Core.csproj", "{F2E94704-6E83-42AD-8FA8-CF2777EDEC30}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -81,6 +83,10 @@ Global
 		{762BE16A-52CB-4AF9-B2B7-80E5409B6780}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{762BE16A-52CB-4AF9-B2B7-80E5409B6780}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{762BE16A-52CB-4AF9-B2B7-80E5409B6780}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2E94704-6E83-42AD-8FA8-CF2777EDEC30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2E94704-6E83-42AD-8FA8-CF2777EDEC30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2E94704-6E83-42AD-8FA8-CF2777EDEC30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2E94704-6E83-42AD-8FA8-CF2777EDEC30}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -105,6 +111,7 @@ Global
 		{F7A237DF-445F-4662-8CEA-DEEDD62814A5} = {E1AC638C-2ADD-4AC1-BAB1-CDC37AE2803E}
 		{D5E5A956-B759-4F8E-BBEC-1E9916336252} = {5A287E55-3066-49B3-8120-D79AF4F0799C}
 		{762BE16A-52CB-4AF9-B2B7-80E5409B6780} = {9C92EFEF-65D7-4AAD-990A-9E38B407194D}
+		{F2E94704-6E83-42AD-8FA8-CF2777EDEC30} = {66036AB6-B376-43E0-B9FE-5F3E2E086D1C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {83286931-6B27-4143-A3E2-30BE610C64EF}

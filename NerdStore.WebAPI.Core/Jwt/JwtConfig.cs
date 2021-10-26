@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using NerdStore.Identity.API.Authentication;
 using System.Text;
 
-namespace NerdStore.Identity.API.Configurations
+namespace NerdStore.WebAPI.Core.Jwt
 {
     public static class JwtConfig
     {
@@ -39,6 +39,14 @@ namespace NerdStore.Identity.API.Configurations
             });
 
             return services;
+        }
+
+        public static IApplicationBuilder UseAuthenticationJwt(this IApplicationBuilder app)
+        {
+            app.UseAuthentication();
+            app.UseAuthorization();
+
+            return app;
         }
     }
 }

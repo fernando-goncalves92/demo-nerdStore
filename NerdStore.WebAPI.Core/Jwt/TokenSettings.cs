@@ -1,4 +1,4 @@
-﻿namespace NerdStore.Identity.API.Authentication
+﻿namespace NerdStore.WebAPI.Core.Jwt
 {
     public class TokenSettings
     {
