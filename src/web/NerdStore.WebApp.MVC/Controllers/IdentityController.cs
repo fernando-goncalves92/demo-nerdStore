@@ -42,7 +42,7 @@ namespace NerdStore.WebApp.MVC.Controllers
 
             await LoginApp(response);
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Catalog");
         }
 
         [HttpGet("login")]
@@ -70,7 +70,7 @@ namespace NerdStore.WebApp.MVC.Controllers
 
             if (string.IsNullOrEmpty(returnUrl))
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Catalog");
             }
 
             return LocalRedirect(returnUrl);
@@ -81,7 +81,7 @@ namespace NerdStore.WebApp.MVC.Controllers
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Catalog");
         }
 
         private async Task LoginApp(UserLoginResponse user)

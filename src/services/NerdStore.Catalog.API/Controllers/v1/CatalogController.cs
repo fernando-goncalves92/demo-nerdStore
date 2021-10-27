@@ -12,21 +12,22 @@ namespace NerdStore.Catalog.API.Controllers.v1
     [ApiController]
     [Authorize]
     [Route("api/v{version:apiVersion}/[controller]")]
-    public class ProductController : ControllerBase
+    public class CatalogController : ControllerBase
     {
         private readonly IProductRepository _productRepository;
 
-        public ProductController(IProductRepository productRepository)
+        public CatalogController(IProductRepository productRepository)
         {
             _productRepository = productRepository;
         }
 
         [AllowAnonymous]
-        [HttpGet("catalog/products")]
+        [HttpGet("products")]
         public async Task<IActionResult> GetProducts() => Ok(ProductToProductModelMapping.Map(await _productRepository.GetAll()));
 
         [ClaimsAuthorize("Catalogo", "Ler")]
-        [HttpGet("catalog/products/{id:guid}")]
-        public async Task<IActionResult> GetProdutById(Guid id) => Ok(ProductToProductModelMapping.Map(await _productRepository.GetById(id)));
+        [HttpGet("products/{id:guid}")]
+        //public async Task<IActionResult> GetProdutById(Guid id) => Ok(ProductToProductModelMapping.Map(await _productRepository.GetById(id)));
+        public async Task<IActionResult> GetProdutById(Guid id) => throw new Exception("Erro");
     }
 }

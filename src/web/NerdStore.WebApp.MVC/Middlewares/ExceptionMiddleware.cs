@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using NerdStore.WebApp.MVC.Exceptions;
+using Polly.CircuitBreaker;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -22,15 +23,29 @@ namespace NerdStore.WebApp.MVC.Middlewares
             }
             catch (CustomHttpResponseException error)
             {
-                if (error.StatusCode == HttpStatusCode.Unauthorized)
-                {
-                    httpContext.Response.Redirect($"/login?ReturnUrl={httpContext.Request.Path}");
-                    
-                    return;
-                }
-
-                httpContext.Response.StatusCode = (int)error.StatusCode;
+                HandleRequestExceptionAsync(httpContext, error.StatusCode);
             }
+            catch (BrokenCircuitException)
+            {
+                HandleCircuitBreakerExceptionAsync(httpContext);
+            }
+        }
+
+        private static void HandleRequestExceptionAsync(HttpContext context, HttpStatusCode statusCode)
+        {
+            if (statusCode == HttpStatusCode.Unauthorized)
+            {
+                context.Response.Redirect($"/login?ReturnUrl={context.Request.Path}");
+
+                return;
+            }
+
+            context.Response.StatusCode = (int)statusCode;
+        }
+
+        private static void HandleCircuitBreakerExceptionAsync(HttpContext context)
+        {
+            context.Response.Redirect("/unavailable-system");
         }
     }
 }

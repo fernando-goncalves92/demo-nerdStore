@@ -15,6 +15,19 @@ namespace NerdStore.WebApp.MVC.Controllers
             return View();
         }
 
+        [Route("unavailable-system")]
+        public IActionResult UnavailableSystem()
+        {
+            var error = new ErrorViewModel
+            {
+                Message = "O sistema está temporariamente indisponível, isto pode ocorrer em momentos de sobrecarga de usuários.",
+                Title = "Sistema indisponível.",
+                Code = 500
+            };
+
+            return View("Error", error);
+        }
+
         [Route("error/{code:length(3,3)}")]
         public IActionResult Error(int code)
         {

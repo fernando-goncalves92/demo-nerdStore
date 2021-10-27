@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Razor;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 
 namespace NerdStore.WebApp.MVC.Extensions
 {
@@ -18,6 +19,16 @@ namespace NerdStore.WebApp.MVC.Extensions
             }
 
             return builder.ToString();
+        }
+
+        public static string CurrencyFormat(this RazorPage page, decimal value)
+        {
+            return string.Format(Thread.CurrentThread.CurrentCulture, "{0:C}", value);
+        }
+
+        public static string StockMessage(this RazorPage page, int amount)
+        {
+            return amount > 0 ? $"Apenas {amount} em estoque!" : "Produto esgotado!";
         }
     }
 }
