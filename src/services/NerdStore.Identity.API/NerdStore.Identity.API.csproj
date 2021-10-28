@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\NerdStore.WebAPI.Core\NerdStore.WebAPI.Core.csproj" />
+    <ProjectReference Include="..\..\building blocks\NerdStore.WebAPI.Core\NerdStore.WebAPI.Core.csproj" />
   </ItemGroup>
   
 </Project>
