@@ -8,7 +8,7 @@ using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace NerdStore.Catalog.API.Configurations
+namespace NerdStore.Customer.API.Configurations
 {
     public static class SwaggerConfig
     {
@@ -81,9 +81,9 @@ namespace NerdStore.Catalog.API.Configurations
         {
             var info = new OpenApiInfo()
             {
-                Title = "API para pesquisa de produtos",
+                Title = "API para cadastro de clientes",
                 Version = description.ApiVersion.ToString(),
-                Description = "API para pesquisa de produtos",
+                Description = "API para cadastro de clientes",
                 Contact = new OpenApiContact() { Name = "Fernando Henrique", Email = "fernando_liro@hotmail.com" },
                 License = new OpenApiLicense() { Name = "MIT", Url = new Uri("https://opensource.org/licenses/MIT") }
             };

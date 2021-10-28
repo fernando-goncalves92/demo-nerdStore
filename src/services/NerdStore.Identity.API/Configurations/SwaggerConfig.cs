@@ -82,9 +82,9 @@ namespace NerdStore.Identity.API.Configurations
         {
             var info = new OpenApiInfo()
             {
-                Title = "API de criação e autenticação de usuários",
+                Title = "API para criação de usuários, autenticação e geração de tokens",
                 Version = description.ApiVersion.ToString(),
-                Description = "Utilize esta API para se cadastrar e se autenticar na NerdStore",
+                Description = "API para criação de usuários, autenticação e geração de tokens",
                 Contact = new OpenApiContact() { Name = "Fernando Henrique", Email = "fernando_liro@hotmail.com" },
                 License = new OpenApiLicense() { Name = "MIT", Url = new Uri("https://opensource.org/licenses/MIT") }
             };

@@ -27,7 +27,6 @@ namespace NerdStore.Catalog.API.Controllers.v1
 
         [ClaimsAuthorize("Catalogo", "Ler")]
         [HttpGet("products/{id:guid}")]
-        //public async Task<IActionResult> GetProdutById(Guid id) => Ok(ProductToProductModelMapping.Map(await _productRepository.GetById(id)));
-        public async Task<IActionResult> GetProdutById(Guid id) => throw new Exception("Erro");
+        public async Task<IActionResult> GetProdutById(Guid id) => Ok(ProductToProductModelMapping.Map(await _productRepository.GetById(id)));
     }
 }
