@@ -23,7 +23,7 @@ namespace NerdStore.Customer.API.Controllers.v1
             _user = user;
         }
 
-        [HttpGet("customer/address")]
+        [HttpGet("address")]
         public async Task<IActionResult> GetAddress()
         {
             var address = await _customerRepository.GetAddressById(_user.GetUserId());
@@ -31,7 +31,7 @@ namespace NerdStore.Customer.API.Controllers.v1
             return address == null ? NotFound() : CustomResponse(address);
         }
 
-        [HttpPost("customer/address")]
+        [HttpPost("address")]
         public async Task<IActionResult> AddAddress(AddCustomerAddressCommand address)
         {
             address.CustomerId = _user.GetUserId();

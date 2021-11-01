@@ -14,6 +14,8 @@ namespace NerdStore.Catalog.API.Configurations
     {
         public static IServiceCollection AddSwaggerConfig(this IServiceCollection services)
         {
+            services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
+
             services.AddSwaggerGen(c =>
             {
                 c.OperationFilter<SwaggerDefaultValues>();
