@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
-using NerdStore.WebApp.MVC.Extensions;
+using NerdStore.WebAPI.Core.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 
-namespace NerdStore.WebApp.MVC.Facilities.User
+namespace NerdStore.WebAPI.Core.Facilities
 {
     public class AspNetUser : IAspNetUser
     {

@@ -1,3 +1,4 @@
+using NerdStore.Core.Communication;
 using System.Text.Json.Serialization;
 
 namespace NerdStore.WebApp.MVC.Models.User

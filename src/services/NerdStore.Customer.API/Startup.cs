@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NerdStore.Customer.API.Configurations;
 using NerdStore.WebAPI.Core.Jwt;
+using MediatR;
 
 namespace NerdStore.Customer.API
 {
@@ -26,10 +27,11 @@ namespace NerdStore.Customer.API
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDependencyInjection(Configuration);
-            services.AddSwaggerConfig();
-            services.AddJwtConfig(Configuration);
             services.AddApiConfig();
+            services.AddJwtConfig(Configuration);
+            services.AddSwaggerConfig();
+            services.AddMediatR(typeof(Startup));
+            services.AddDependencyInjection(Configuration);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)

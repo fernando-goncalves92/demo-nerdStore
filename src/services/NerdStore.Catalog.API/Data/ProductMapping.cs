@@ -22,7 +22,7 @@ namespace NerdStore.Catalog.API.Data
                 .IsRequired()
                 .HasColumnType("VARCHAR(250)");
 
-            builder.ToTable("Products");
+            builder.ToTable("Product");
         }
     }
 }

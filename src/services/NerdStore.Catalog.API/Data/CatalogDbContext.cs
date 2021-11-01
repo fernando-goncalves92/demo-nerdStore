@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using FluentValidation.Results;
+using Microsoft.EntityFrameworkCore;
 using NerdStore.Catalog.API.Entities;
 using NerdStore.Core.Data.Interfaces;
+using NerdStore.Core.Messages;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -14,6 +16,9 @@ namespace NerdStore.Catalog.API.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Ignore<ValidationResult>();
+            modelBuilder.Ignore<Event>();
+
             EnsureNVarcharColumnsWillNotBeCreate(modelBuilder);
 
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(CatalogDbContext).Assembly);

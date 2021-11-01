@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using NerdStore.Identity.API.Authentication;
 using NerdStore.Identity.API.Extensions;
 using NerdStore.Identity.API.ViewModels;
+using NerdStore.WebAPI.Core.Controllers;
 using NerdStore.WebAPI.Core.Jwt;
 using System;
 using System.IdentityModel.Tokens.Jwt;

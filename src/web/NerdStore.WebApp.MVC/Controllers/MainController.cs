@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using NerdStore.WebApp.MVC.Models;
+using NerdStore.Core.Communication;
 using System.Linq;
 
 namespace NerdStore.WebApp.MVC.Controllers

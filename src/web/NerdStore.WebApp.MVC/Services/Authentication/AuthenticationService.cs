@@ -2,9 +2,9 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
-using NerdStore.WebApp.MVC.Models;
 using NerdStore.WebApp.MVC.Facilities;
 using NerdStore.WebApp.MVC.Models.User;
+using NerdStore.Core.Communication;
 
 namespace NerdStore.WebApp.MVC.Services.Authentication
 {
