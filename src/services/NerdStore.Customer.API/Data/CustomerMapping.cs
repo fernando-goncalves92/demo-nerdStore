@@ -1,11 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using NerdStore.Customer.API.Entities;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using NerdStore.Customer.API.ValueObjects;
+using NerdStore.Core.DomainObjects;
 
 namespace NerdStore.Customer.API.Data
 {

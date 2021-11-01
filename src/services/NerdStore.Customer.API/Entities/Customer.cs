@@ -1,5 +1,4 @@
 ﻿using NerdStore.Core.DomainObjects;
-using NerdStore.Customer.API.ValueObjects;
 using System;
 
 namespace NerdStore.Customer.API.Entities

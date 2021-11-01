@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace NerdStore.Customer.API.ValueObjects
+namespace NerdStore.Core.DomainObjects
 {
     public class Cpf
     {

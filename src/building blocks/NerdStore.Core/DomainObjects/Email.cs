@@ -1,7 +1,7 @@
 ﻿using NerdStore.Core.Exceptions;
 using System.Text.RegularExpressions;
 
-namespace NerdStore.Customer.API.ValueObjects
+namespace NerdStore.Core.DomainObjects
 {
     public class Email
     {

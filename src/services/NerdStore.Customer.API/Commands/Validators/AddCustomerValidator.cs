@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using NerdStore.Customer.API.ValueObjects;
+using NerdStore.Core.DomainObjects;
 using System;
 
 namespace NerdStore.Customer.API.Commands.Validators
