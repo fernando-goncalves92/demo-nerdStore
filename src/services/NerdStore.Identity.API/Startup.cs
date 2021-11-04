@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NerdStore.Identity.API.Configurations;
+using NerdStore.MessageBus;
 using NerdStore.WebAPI.Core.Jwt;
 
 namespace NerdStore.Identity.API
@@ -35,6 +36,7 @@ namespace NerdStore.Identity.API
             services.AddIdentityConfig(Configuration);
             services.AddJwtConfig(Configuration);
             services.AddSwaggerConfig();
+            services.AddRabbitMQMessageBusConfig(Configuration);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)

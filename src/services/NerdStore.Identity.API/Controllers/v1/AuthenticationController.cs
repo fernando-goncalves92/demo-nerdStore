@@ -3,9 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using NerdStore.Core.Messages;
+using NerdStore.Core.SharedEvents;
 using NerdStore.Identity.API.Authentication;
 using NerdStore.Identity.API.Extensions;
 using NerdStore.Identity.API.ViewModels;
+using NerdStore.MessageBus;
 using NerdStore.WebAPI.Core.Controllers;
 using NerdStore.WebAPI.Core.Jwt;
 using System;
@@ -21,6 +24,7 @@ namespace NerdStore.Identity.API.Controllers.v1
     [Route("api/v{version:apiVersion}/[controller]")]    
     public class AuthenticationController : MainController
     {
+        private readonly IMessageBus _bus;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly TokenSettings _tokenSettings;
@@ -30,11 +34,13 @@ namespace NerdStore.Identity.API.Controllers.v1
             SignInManager<IdentityUser> signInManager,
             UserManager<IdentityUser> userManager,
             IOptions<TokenSettings> tokenSettings,
+            IMessageBus bus,
             ILogger<AuthenticationController> logger)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _tokenSettings = tokenSettings.Value;
+            _bus = bus;
             _logger = logger;
         }
 
@@ -56,6 +62,17 @@ namespace NerdStore.Identity.API.Controllers.v1
             if (result.Succeeded)
             {
                 _logger.LogInformation($"Novo usuário criado ({registerUserViewModel.Email})");
+
+                var createCustomerResult = await CreateCustomer(registerUserViewModel);
+
+                _logger.LogInformation($"Usuário enviado para a fila de criação de clientes");
+
+                if (!createCustomerResult.ValidationResult.IsValid)
+                {
+                    await _userManager.DeleteAsync(user);
+
+                    return CustomResponse(createCustomerResult.ValidationResult);
+                }
 
                 return CustomResponse(await GenerateJwt(registerUserViewModel.Email));
             }
@@ -146,6 +163,28 @@ namespace NerdStore.Identity.API.Controllers.v1
             identityClaims.AddClaims(claims);
 
             return identityClaims;
+        }
+
+        private async Task<ResponseMessage> CreateCustomer(RegisterUserViewModel registerUserViewModel)
+        {
+            var createdUser = await _userManager.FindByEmailAsync(registerUserViewModel.Email);
+
+            try
+            {
+                var createdUserIntegrationEvent = new AddedUserIntegrationEvent(
+                    Guid.Parse(createdUser.Id), 
+                    registerUserViewModel.Name, 
+                    registerUserViewModel.Email, 
+                    registerUserViewModel.Cpf);
+
+                return await _bus.RequestAsync<AddedUserIntegrationEvent, ResponseMessage>(createdUserIntegrationEvent);
+            }
+            catch
+            {
+                await _userManager.DeleteAsync(createdUser);
+                
+                throw;
+            }
         }
     }
 }

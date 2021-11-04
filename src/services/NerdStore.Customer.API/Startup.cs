@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using NerdStore.Customer.API.Configurations;
 using NerdStore.WebAPI.Core.Jwt;
 using MediatR;
+using NerdStore.MessageBus;
 
 namespace NerdStore.Customer.API
 {
@@ -32,6 +33,8 @@ namespace NerdStore.Customer.API
             services.AddSwaggerConfig();
             services.AddMediatR(typeof(Startup));
             services.AddDependencyInjection(Configuration);
+            services.AddRabbitMQMessageBusConfig(Configuration);
+            services.AddBackgroundServicesConfig();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)
