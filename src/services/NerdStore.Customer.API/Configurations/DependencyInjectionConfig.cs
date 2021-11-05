@@ -8,6 +8,7 @@ using NerdStore.Core.Mediator;
 using NerdStore.Customer.API.Commands;
 using NerdStore.Customer.API.Data;
 using NerdStore.Customer.API.Events;
+using NerdStore.WebAPI.Core.Facilities;
 
 namespace NerdStore.Customer.API.Configurations
 {
@@ -17,8 +18,7 @@ namespace NerdStore.Customer.API.Configurations
         {
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             
-            //services.AddScoped<IAspNetUser, AspNetUser>();
-            
+            services.AddScoped<IAspNetUser, AspNetUser>();
             services.AddScoped<CustomerDbContext>();
             services.AddScoped<IMediatorHandler, MediatorHandler>();
             services.AddScoped<IRequestHandler<AddCustomerCommand, ValidationResult>, CustomerCommandHandler>();
