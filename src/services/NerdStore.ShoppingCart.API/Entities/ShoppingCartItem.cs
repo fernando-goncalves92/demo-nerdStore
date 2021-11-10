@@ -1,4 +1,5 @@
 ﻿using System;
+using NerdStore.ShoppingCart.API.Entities.Validators;
 
 namespace NerdStore.ShoppingCart.API.Entities
 {
@@ -19,6 +20,31 @@ namespace NerdStore.ShoppingCart.API.Entities
         {
             Id = Guid.NewGuid();
             ShoppingCartId = shoppingCartId;
+        }
+
+        public void AssignShoppingCart(Guid shoppingCartId)
+        {
+            ShoppingCartId = shoppingCartId;
+        }
+
+        public decimal CalculateFinalPrice()
+        {
+            return Amount * Price;
+        }
+
+        public void IncreaseAmount(int amount)
+        {
+            Amount += amount;
+        }
+
+        public void UpdateAmount(int amount)
+        {
+            Amount = amount;
+        }
+
+        public bool IsValid()
+        {
+            return new ShoppingCartItemValidator().Validate(this).IsValid;
         }
     }
 }
