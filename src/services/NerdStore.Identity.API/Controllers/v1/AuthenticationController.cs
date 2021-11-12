@@ -179,7 +179,7 @@ namespace NerdStore.Identity.API.Controllers.v1
 
                 return await _bus.RequestAsync<AddedUserIntegrationEvent, ResponseMessage>(createdUserIntegrationEvent);
             }
-            catch
+            catch(Exception e)
             {
                 await _userManager.DeleteAsync(createdUser);
                 

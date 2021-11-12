@@ -22,7 +22,7 @@ namespace NerdStore.WebApp.MVC.Services.Authentication
         {   
             var response = await _httpClient.PostAsync("/api/v1/authentication/create-account", ConvertToStringContent(user));
             
-            if (!VerifyResponseErrors(response))
+            if (!IsSuccessResponseStatusCode(response))
             {
                 return new UserLoginResponse
                 {
@@ -37,7 +37,7 @@ namespace NerdStore.WebApp.MVC.Services.Authentication
         {
             var response = await _httpClient.PostAsync("/api/v1/authentication/login", ConvertToStringContent(user));
 
-            if (!VerifyResponseErrors(response))
+            if (!IsSuccessResponseStatusCode(response))
             {
                 return new UserLoginResponse
                 {

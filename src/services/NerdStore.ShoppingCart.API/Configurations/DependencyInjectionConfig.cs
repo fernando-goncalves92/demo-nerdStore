@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NerdStore.ShoppingCart.API.Data;
@@ -14,6 +15,8 @@ namespace NerdStore.ShoppingCart.API.Configurations
             {
                 options.UseSqlServer(configuration.GetConnectionString("NerdStoreConnection"));
             });
+            
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddScoped<IAspNetUser, AspNetUser>();
             services.AddScoped<ShoppingContext>();

@@ -6,7 +6,7 @@ namespace NerdStore.WebApp.MVC.Controllers
 {
     public class MainController : Controller
     {
-        protected bool ExistsResponseErrors(ResponseResult response)
+        protected bool ResponseHasErros(ResponseResult response)
         {
             if (response != null && response.Errors.Messages.Any())
             {
@@ -19,6 +19,16 @@ namespace NerdStore.WebApp.MVC.Controllers
             }
 
             return false;
+        }
+
+        protected void AddError(string message)
+        {
+            ModelState.AddModelError(string.Empty, message);
+        }
+
+        protected bool IsValidOperation()
+        {
+            return ModelState.ErrorCount == 0;
         }
     }
 }

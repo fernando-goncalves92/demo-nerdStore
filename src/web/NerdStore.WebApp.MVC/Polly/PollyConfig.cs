@@ -11,7 +11,7 @@ namespace NerdStore.WebApp.MVC.Polly
     {
         public static AsyncRetryPolicy<HttpResponseMessage> WaitAndRetryConfig()
         {
-            var retry = HttpPolicyExtensions
+            return HttpPolicyExtensions
                 .HandleTransientHttpError()
                 .WaitAndRetryAsync(new[]
                 {
@@ -26,8 +26,6 @@ namespace NerdStore.WebApp.MVC.Polly
                     Console.WriteLine($"Tentando pela {retryCount} vez!");
                     Console.ForegroundColor = ConsoleColor.White;
                 });
-
-            return retry;
         }
 
         public static AsyncCircuitBreakerPolicy<HttpResponseMessage> CircuitBreakerConfig(PolicyBuilder<HttpResponseMessage> builder)

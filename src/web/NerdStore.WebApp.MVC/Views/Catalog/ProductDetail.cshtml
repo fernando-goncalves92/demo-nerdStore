@@ -15,9 +15,9 @@
             </aside>
             <main class="col-md-6 border-left">
                 <article class="content-body">
-                    <form asp-controller="Carrinho" asp-action="AdicionarItemCarrinho" method="post">
+                    <form asp-controller="ShoppingCart" asp-action="AddItem" method="post">
 
-                        <input type="hidden" id="ProdutoId" name="ProdutoId" value="@Model.Id" />
+                        <input type="hidden" id="ProductId" name="ProductId" value="@Model.Id" />
 
                         <h2 class="title">@Model.Name</h2>
 
@@ -54,7 +54,7 @@
                                     <div class="form-group col-md flex-grow-0">
                                         <label>Quantidade</label>
                                         <div class="input-group input-spinner">
-                                            <select id="Quantidade" name="Quantidade" class="form-control">
+                                            <select id="Amount" name="Amount" class="form-control">
                                                 <option value="1">1</option>
                                                 <option value="2">2</option>
                                                 <option value="3">3</option>

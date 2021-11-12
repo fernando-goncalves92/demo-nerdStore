@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using FluentValidation.Results;
+using Microsoft.EntityFrameworkCore;
 using NerdStore.Core.Data.Interfaces;
 using NerdStore.ShoppingCart.API.Entities;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace NerdStore.ShoppingCart.API.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Ignore<ValidationResult>();
+            modelBuilder.Ignore<ValidationResult>();
 
             EnsureNVarcharColumnsWillNotBeCreate(modelBuilder);
 

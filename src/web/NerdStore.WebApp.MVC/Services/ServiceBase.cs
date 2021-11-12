@@ -1,4 +1,5 @@
-﻿using NerdStore.WebApp.MVC.Exceptions;
+﻿using NerdStore.Core.Communication;
+using NerdStore.WebApp.MVC.Exceptions;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -8,7 +9,7 @@ namespace NerdStore.WebApp.MVC.Services
 {
     public abstract class ServiceBase
     {
-        protected bool VerifyResponseErrors(HttpResponseMessage response)
+        protected bool IsSuccessResponseStatusCode(HttpResponseMessage response)
         {
             switch ((int)response.StatusCode)
             {
@@ -33,6 +34,11 @@ namespace NerdStore.WebApp.MVC.Services
         protected async Task<T> GetResponse<T>(HttpResponseMessage response)
         {
             return JsonSerializer.Deserialize<T>(await response.Content.ReadAsStringAsync(), new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+        }
+
+        protected ResponseResult Ok()
+        {
+            return new ResponseResult();
         }
     }
 }

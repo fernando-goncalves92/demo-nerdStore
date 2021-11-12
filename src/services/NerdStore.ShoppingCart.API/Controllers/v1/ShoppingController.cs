@@ -28,7 +28,15 @@ namespace NerdStore.ShoppingCart.API.Controllers.v1
             return await GetShoppingCartCustomer() ?? new Entities.ShoppingCart();
         }
 
-        [HttpPost("cart")]
+        [HttpGet("cart/items/amount")]
+        public async Task<int> GetTotalItemsInShoppingCart()
+        {
+            var shoppingCart = await GetShoppingCartCustomer() ?? new Entities.ShoppingCart();
+
+            return shoppingCart.Items.Count;
+        }
+
+        [HttpPost("cart/items")]
         public async Task<IActionResult> AddShoppingCartItem(Entities.ShoppingCartItem item)
         {
             var shoppingCart = await GetShoppingCartCustomer();
@@ -69,7 +77,7 @@ namespace NerdStore.ShoppingCart.API.Controllers.v1
             return CustomResponse();
         }
 
-        [HttpPut("cart/{productId:guid}")]
+        [HttpPut("cart/items/{productId:guid}")]
         public async Task<IActionResult> UpdateShoppingCartItem(Guid productId, Entities.ShoppingCartItem shoppingCartItemUpdated)
         {
             var shoppingCart = await GetShoppingCartCustomer();
@@ -78,7 +86,7 @@ namespace NerdStore.ShoppingCart.API.Controllers.v1
             if (shoppingCartItem == null) 
                 return CustomResponse();
 
-            shoppingCart.UpdateShoppingCartItemAmount(shoppingCartItem, shoppingCartItem.Amount);
+            shoppingCart.UpdateShoppingCartItemAmount(shoppingCartItem, shoppingCartItemUpdated.Amount);
 
             if (!IsShoppingCartValid(shoppingCart))
                 return CustomResponse();
@@ -92,7 +100,7 @@ namespace NerdStore.ShoppingCart.API.Controllers.v1
             return CustomResponse();
         }
 
-        [HttpDelete("cart/{productId:guid}")]
+        [HttpDelete("cart/items/{productId:guid}")]
         public async Task<IActionResult> RemoveShoppingCartItem(Guid productId)
         {
             var shoppingCart = await GetShoppingCartCustomer();

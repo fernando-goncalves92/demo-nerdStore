@@ -90,6 +90,8 @@ namespace NerdStore.ShoppingCart.API.Entities
             
             errors.AddRange(new ShoppingCartValidator().Validate(this).Errors);
 
+            ValidationResult = new ValidationResult(errors);
+
             return errors.Count <= 0;
         }
     }

@@ -37,7 +37,7 @@ namespace NerdStore.WebApp.MVC.Controllers
 
             var response = await _authenticationService.CreateAccount(user);
 
-            if (ExistsResponseErrors(response.ResponseResult))
+            if (ResponseHasErros(response.ResponseResult))
                 return View(user);
 
             await LoginApp(response);
@@ -63,7 +63,7 @@ namespace NerdStore.WebApp.MVC.Controllers
 
             var response = await _authenticationService.Login(user);
 
-            if (ExistsResponseErrors(response.ResponseResult))
+            if (ResponseHasErros(response.ResponseResult))
                 return View(user);
 
             await LoginApp(response);

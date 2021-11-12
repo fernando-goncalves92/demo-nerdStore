@@ -22,7 +22,7 @@ namespace NerdStore.WebApp.MVC.Services.Catalog
         {   
             var response = await _httpClient.GetAsync("/api/v1/catalog/products");
 
-            VerifyResponseErrors(response);
+            IsSuccessResponseStatusCode(response);
 
             return await GetResponse<IEnumerable<ProductViewModel>>(response);
         }
@@ -31,7 +31,7 @@ namespace NerdStore.WebApp.MVC.Services.Catalog
         {
             var response = await _httpClient.GetAsync($"/api/v1/catalog/products/{id}");
 
-            VerifyResponseErrors(response);
+            IsSuccessResponseStatusCode(response);
 
             return await GetResponse<ProductViewModel>(response);
         }
