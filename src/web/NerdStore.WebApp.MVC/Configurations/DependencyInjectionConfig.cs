@@ -1,13 +1,11 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using NerdStore.WebAPI.Core.Facilities;
+using NerdStore.WebAPI.Core.Polly;
 using NerdStore.WebApp.MVC.DelegatingHandlers;
-using NerdStore.WebApp.MVC.Polly;
 using NerdStore.WebApp.MVC.Services.Authentication;
 using NerdStore.WebApp.MVC.Services.Catalog;
 using NerdStore.WebApp.MVC.Services.ShoppingCart;
-using Polly;
-using System;
 
 namespace NerdStore.WebApp.MVC.Configurations
 {

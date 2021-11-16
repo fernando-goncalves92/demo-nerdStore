@@ -5,7 +5,7 @@ using Polly.Retry;
 using System;
 using System.Net.Http;
 
-namespace NerdStore.WebApp.MVC.Polly
+namespace NerdStore.WebAPI.Core.Polly
 {
     public static class PollyConfig
     {
@@ -15,16 +15,9 @@ namespace NerdStore.WebApp.MVC.Polly
                 .HandleTransientHttpError()
                 .WaitAndRetryAsync(new[]
                 {
-                    TimeSpan.FromSeconds(1),  // Primeira tentativa após 1 segundo do erro
-                    TimeSpan.FromSeconds(5),  // após 5 segundos
-                    TimeSpan.FromSeconds(10), // após 10 segundos
-                }, (outcome, timespan, retryCount, context) =>
-                {
-                    // Este método é executado antes da nova tentativa
-
-                    Console.ForegroundColor = ConsoleColor.Blue;
-                    Console.WriteLine($"Tentando pela {retryCount} vez!");
-                    Console.ForegroundColor = ConsoleColor.White;
+                        TimeSpan.FromSeconds(1),  // Primeira tentativa após 1 segundo do erro
+                        TimeSpan.FromSeconds(5),  // após 5 segundos
+                        TimeSpan.FromSeconds(10), // após 10 segundos
                 });
         }
 
