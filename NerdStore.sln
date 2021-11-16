@@ -45,7 +45,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NerdStore.ShoppingCart.API"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NerdStore.WebAPI.Core", "src\building blocks\NerdStore.WebAPI.Core\NerdStore.WebAPI.Core.csproj", "{F2E94704-6E83-42AD-8FA8-CF2777EDEC30}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NerdStore.MessageBus", "src\building blocks\NerdStore.MessageBus\NerdStore.MessageBus.csproj", "{549AB266-5BAA-4F25-AFE9-2FDB6A8E155C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NerdStore.MessageBus", "src\building blocks\NerdStore.MessageBus\NerdStore.MessageBus.csproj", "{549AB266-5BAA-4F25-AFE9-2FDB6A8E155C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BFF", "BFF", "{CFE553E6-99A5-41AA-8415-5836DC26C705}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shopping", "Shopping", "{C0147267-30C3-49C1-892F-0923A5FC78D2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NerdStore.BFF.Shopping", "src\bff\shopping\NerdStore.BFF.Shopping\NerdStore.BFF.Shopping.csproj", "{6FBB3C00-2A04-4272-A800-9386CEF3F3B7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -93,6 +99,10 @@ Global
 		{549AB266-5BAA-4F25-AFE9-2FDB6A8E155C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{549AB266-5BAA-4F25-AFE9-2FDB6A8E155C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{549AB266-5BAA-4F25-AFE9-2FDB6A8E155C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FBB3C00-2A04-4272-A800-9386CEF3F3B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FBB3C00-2A04-4272-A800-9386CEF3F3B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FBB3C00-2A04-4272-A800-9386CEF3F3B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FBB3C00-2A04-4272-A800-9386CEF3F3B7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -119,6 +129,9 @@ Global
 		{762BE16A-52CB-4AF9-B2B7-80E5409B6780} = {9C92EFEF-65D7-4AAD-990A-9E38B407194D}
 		{F2E94704-6E83-42AD-8FA8-CF2777EDEC30} = {66036AB6-B376-43E0-B9FE-5F3E2E086D1C}
 		{549AB266-5BAA-4F25-AFE9-2FDB6A8E155C} = {66036AB6-B376-43E0-B9FE-5F3E2E086D1C}
+		{CFE553E6-99A5-41AA-8415-5836DC26C705} = {6889D2BC-DE04-46F7-9E75-9A9B0A5FAA06}
+		{C0147267-30C3-49C1-892F-0923A5FC78D2} = {CFE553E6-99A5-41AA-8415-5836DC26C705}
+		{6FBB3C00-2A04-4272-A800-9386CEF3F3B7} = {C0147267-30C3-49C1-892F-0923A5FC78D2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {83286931-6B27-4143-A3E2-30BE610C64EF}
