@@ -9,6 +9,17 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.11.1" />
+	<PackageReference Include="SwashBuckle.AspNetCore" Version="5.4.1" />
+	<PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="4.1.1" />
+	<PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="4.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\building blocks\NerdStore.WebAPI.Core\NerdStore.WebAPI.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\" />
   </ItemGroup>
 
 

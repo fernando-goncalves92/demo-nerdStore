@@ -51,7 +51,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BFF", "BFF", "{CFE553E6-99A
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shopping", "Shopping", "{C0147267-30C3-49C1-892F-0923A5FC78D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NerdStore.BFF.Shopping", "src\bff\shopping\NerdStore.BFF.Shopping\NerdStore.BFF.Shopping.csproj", "{6FBB3C00-2A04-4272-A800-9386CEF3F3B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NerdStore.BFF.Shopping", "src\bff\shopping\NerdStore.BFF.Shopping\NerdStore.BFF.Shopping.csproj", "{6FBB3C00-2A04-4272-A800-9386CEF3F3B7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NerdStore.Order.Domain", "src\services\NerdStore.Order.Domain\NerdStore.Order.Domain.csproj", "{16543FF7-C00A-4A5E-8015-929AA2337957}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NerdStore.Order.Infra", "src\services\NerdStore.Order.Infra\NerdStore.Order.Infra.csproj", "{162D5F1D-ECB7-40A6-8E8E-7FB75E71A42B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -103,6 +107,14 @@ Global
 		{6FBB3C00-2A04-4272-A800-9386CEF3F3B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6FBB3C00-2A04-4272-A800-9386CEF3F3B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6FBB3C00-2A04-4272-A800-9386CEF3F3B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16543FF7-C00A-4A5E-8015-929AA2337957}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16543FF7-C00A-4A5E-8015-929AA2337957}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16543FF7-C00A-4A5E-8015-929AA2337957}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16543FF7-C00A-4A5E-8015-929AA2337957}.Release|Any CPU.Build.0 = Release|Any CPU
+		{162D5F1D-ECB7-40A6-8E8E-7FB75E71A42B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{162D5F1D-ECB7-40A6-8E8E-7FB75E71A42B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{162D5F1D-ECB7-40A6-8E8E-7FB75E71A42B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{162D5F1D-ECB7-40A6-8E8E-7FB75E71A42B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -132,6 +144,8 @@ Global
 		{CFE553E6-99A5-41AA-8415-5836DC26C705} = {6889D2BC-DE04-46F7-9E75-9A9B0A5FAA06}
 		{C0147267-30C3-49C1-892F-0923A5FC78D2} = {CFE553E6-99A5-41AA-8415-5836DC26C705}
 		{6FBB3C00-2A04-4272-A800-9386CEF3F3B7} = {C0147267-30C3-49C1-892F-0923A5FC78D2}
+		{16543FF7-C00A-4A5E-8015-929AA2337957} = {E1AC638C-2ADD-4AC1-BAB1-CDC37AE2803E}
+		{162D5F1D-ECB7-40A6-8E8E-7FB75E71A42B} = {E1AC638C-2ADD-4AC1-BAB1-CDC37AE2803E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {83286931-6B27-4143-A3E2-30BE610C64EF}
