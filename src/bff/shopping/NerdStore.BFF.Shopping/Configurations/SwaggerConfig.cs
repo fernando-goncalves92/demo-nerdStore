@@ -83,9 +83,9 @@ namespace NerdStore.BFF.Shopping.Configurations
         {
             var info = new OpenApiInfo()
             {
-                Title = "Back for front-end para o processo de compras",
+                Title = "Back-end for front-end do processo de compras",
                 Version = description.ApiVersion.ToString(),
-                Description = "Back for front-end para o processo de compras",
+                Description = "Back-end for front-end do processo de compras",
                 Contact = new OpenApiContact() { Name = "Fernando Henrique", Email = "fernando_liro@hotmail.com" },
                 License = new OpenApiLicense() { Name = "MIT", Url = new Uri("https://opensource.org/licenses/MIT") }
             };

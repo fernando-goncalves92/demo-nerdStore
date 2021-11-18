@@ -21,7 +21,7 @@ namespace NerdStore.WebAPI.Core.Controllers
 
             return BadRequest(new ValidationProblemDetails(new Dictionary<string, string[]>
             {
-                { "Mensagens", Errors.ToArray() }
+                { "Messages", Errors.ToArray() }
             }));
         }
 

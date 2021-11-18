@@ -3,20 +3,19 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using NerdStore.WebApp.MVC.Facilities;
-using NerdStore.WebApp.MVC.Models.User;
 using NerdStore.Core.Communication;
 using NerdStore.WebApp.MVC.Models.ShoppingCart;
 
-namespace NerdStore.WebApp.MVC.Services.ShoppingCart
+namespace NerdStore.WebApp.MVC.Services.ShoppingBff
 {
-    public class ShoppingCartService : ServiceBase, IShoppingCartService
+    public class ShoppingBffService : ServiceBase, IShoppingBffService
     {
         private readonly HttpClient _httpClient;
 
-        public ShoppingCartService(HttpClient httpClient, IOptions<UrlAccess> options)
+        public ShoppingBffService(HttpClient httpClient, IOptions<UrlAccess> options)
         {
             _httpClient = httpClient;
-            _httpClient.BaseAddress = new Uri(options.Value.ShoppingCartUrl);
+            _httpClient.BaseAddress = new Uri(options.Value.ShoppingBffUrl);
         }
 
         public async Task<ShoppingCartViewModel> GetShoppingCart()

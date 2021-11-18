@@ -1,21 +1,21 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using NerdStore.WebApp.MVC.Services.ShoppingCart;
+using NerdStore.WebApp.MVC.Services.ShoppingBff;
 
 namespace NerdStore.WebApp.MVC.ViewComponents
 {
     public class ShoppingCartViewComponent : ViewComponent
     {
-        private readonly IShoppingCartService _shoopingCartService;
+        private readonly IShoppingBffService _shoopingBffService;
 
-        public ShoppingCartViewComponent(IShoppingCartService shoopingCartService)
+        public ShoppingCartViewComponent(IShoppingBffService shoopingBffService)
         {
-            _shoopingCartService = shoopingCartService;
+            _shoopingBffService = shoopingBffService;
         }
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            return View(await _shoopingCartService.GetShoppingCart());
+            return View(await _shoopingBffService.GetShoppingCartAmount());
         }
     }
 }

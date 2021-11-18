@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NerdStore.ShoppingCart.API.Data;
 using NerdStore.WebAPI.Core.Controllers;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 namespace NerdStore.ShoppingCart.API.Controllers.v1
 {
     [ApiVersion("1.0")]
+    [Authorize]
     [Route("api/v{version:apiVersion}/[controller]")]
     public class ShoppingController : MainController
     {

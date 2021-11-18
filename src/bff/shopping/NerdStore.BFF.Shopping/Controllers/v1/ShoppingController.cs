@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using NerdStore.BFF.Shopping.Models;
 using NerdStore.BFF.Shopping.Services.Catalog;
 using NerdStore.BFF.Shopping.Services.ShoppingCart;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 namespace NerdStore.BFF.Shopping.API.Controllers.v1
 {
     [ApiVersion("1.0")]
+    [Authorize]
     [Route("api/v{version:apiVersion}/[controller]")]
     public class ShoppingController : MainController
     {
@@ -63,7 +65,7 @@ namespace NerdStore.BFF.Shopping.API.Controllers.v1
         {
             var product = await _catalogService.GetProductById(productId);
 
-            await ValidateShoppingCartItem(product, item.Amount, true);
+            await ValidateShoppingCartItem(product, item.Amount);
 
             if (!IsValidOperation())
             {

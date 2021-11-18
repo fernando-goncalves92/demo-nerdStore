@@ -1,17 +1,20 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using NerdStore.BFF.Shopping.Facilities;
 using NerdStore.WebAPI.Core.Jwt;
 
 namespace NerdStore.BFF.Shopping.Configurations
 {
     public static class ApiConfig
     {
-        public static IServiceCollection AddApiConfig(this IServiceCollection services)
+        public static IServiceCollection AddApiConfig(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddControllers();
+            services.Configure<UrlAccess>(configuration);
             services.AddRouting(options => options.LowercaseUrls = true);
 
             services.AddApiVersioning(options =>

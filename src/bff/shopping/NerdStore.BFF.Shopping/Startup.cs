@@ -29,7 +29,7 @@ namespace NerdStore.BFF.Shopping
             services.AddDependencyInjection(Configuration);
             services.AddSwaggerConfig();
             services.AddJwtConfig(Configuration);
-            services.AddApiConfig();
+            services.AddApiConfig(Configuration);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)

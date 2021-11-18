@@ -3,9 +3,9 @@ using System;
 using System.Threading.Tasks;
 using NerdStore.WebApp.MVC.Models.ShoppingCart;
 
-namespace NerdStore.WebApp.MVC.Services.ShoppingCart
+namespace NerdStore.WebApp.MVC.Services.ShoppingBff
 {
-    public interface IShoppingCartService
+    public interface IShoppingBffService
     {
         Task<ShoppingCartViewModel> GetShoppingCart();
         Task<int> GetShoppingCartAmount();
