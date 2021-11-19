@@ -24,7 +24,7 @@ namespace NerdStore.Order.Infra.Data
             _mediatorHandler = mediatorHandler;
         }
 
-        public DbSet<Domain.Order.Order> Orders { get; set; }
+        //public DbSet<Domain.Order.Order> Orders { get; set; }
         public DbSet<Voucher> Vouchers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

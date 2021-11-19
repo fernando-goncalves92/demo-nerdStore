@@ -1,3 +1,4 @@
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
@@ -30,6 +31,7 @@ namespace NerdStore.Order.API
             services.AddApiConfig();
             services.AddJwtConfig(Configuration);
             services.AddSwaggerConfig();
+            services.AddMediatR(typeof(Startup));
             services.AddDependencyInjection(Configuration);
         }
 
