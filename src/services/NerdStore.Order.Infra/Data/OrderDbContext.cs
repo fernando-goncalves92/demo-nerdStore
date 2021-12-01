@@ -8,6 +8,7 @@ using NerdStore.Core.Data.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using NerdStore.Order.Domain.Voucher;
 using NerdStore.Order.Infra.Extensions;
+using System;
 
 namespace NerdStore.Order.Infra.Data
 {
@@ -24,7 +25,8 @@ namespace NerdStore.Order.Infra.Data
             _mediatorHandler = mediatorHandler;
         }
 
-        //public DbSet<Domain.Order.Order> Orders { get; set; }
+        public DbSet<Domain.Order.Order> Orders { get; set; }
+        public DbSet<Domain.Order.OrderItem> OrderItems { get; set; }
         public DbSet<Voucher> Vouchers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -36,7 +38,17 @@ namespace NerdStore.Order.Infra.Data
 
             EnsureNotDeleteInCascade(modelBuilder);
 
+            EnsureSequenceIdStartsIn1000(modelBuilder);
+
             ApplyMappings(modelBuilder, typeof(OrderDbContext).Assembly);
+        }
+
+        private void EnsureSequenceIdStartsIn1000(ModelBuilder modelBuilder)
+        {
+            modelBuilder
+                .HasSequence<int>("MySequenceStartingIn1000")
+                .StartsAt(1000)
+                .IncrementsBy(1);
         }
 
         private void EnsureNVarcharColumnsWillNotBeCreate(ModelBuilder modelBuilder)
@@ -61,6 +73,24 @@ namespace NerdStore.Order.Infra.Data
             }
         }
 
+        private void EnsureNotChangeRegistrationDateFields()
+        {
+            foreach (var entry in ChangeTracker
+                .Entries()
+                .Where(entry => entry.Entity.GetType().GetProperty("RegistrationDate") != null))
+            {
+                if (entry.State == EntityState.Added)
+                {
+                    entry.Property("RegistrationDate").CurrentValue = DateTime.Now;
+                }
+
+                if (entry.State == EntityState.Modified)
+                {
+                    entry.Property("RegistrationDate").IsModified = false;
+                }
+            }
+        }
+
         private void ApplyMappings(ModelBuilder modelBuilder, Assembly assembly)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(assembly);
@@ -68,6 +98,8 @@ namespace NerdStore.Order.Infra.Data
 
         public async Task<bool> CommitAsync()
         {
+            EnsureNotChangeRegistrationDateFields();
+
             var success = await base.SaveChangesAsync() > 0;
 
             if (success)

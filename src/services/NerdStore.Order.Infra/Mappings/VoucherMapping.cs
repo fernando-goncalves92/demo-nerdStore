@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using NerdStore.Order.Domain.Voucher;
 
-namespace NerdStore.Order.Infra.Data
+namespace NerdStore.Order.Infra.Mappings
 {
     public class VoucherMapping : IEntityTypeConfiguration<Voucher>
     {

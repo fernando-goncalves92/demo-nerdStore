@@ -9,7 +9,7 @@ namespace NerdStore.Order.Domain.Voucher
         public decimal? DiscountPercentage { get; private set; }
         public decimal? DiscountAmount { get; private set; }
         public int AvailableAmount { get; private set; }
-        public DisccountType DiscountType { get; private set; }
+        public DiscountType DiscountType { get; private set; }
         public DateTime CreateDate { get; private set; }
         public DateTime? UsedDate { get; private set; }
         public DateTime ExpirationDate { get; private set; }
