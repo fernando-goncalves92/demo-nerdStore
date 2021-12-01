@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NerdStore.ShoppingCart.API.Data;
+using NerdStore.ShoppingCart.API.Entities;
 using NerdStore.WebAPI.Core.Controllers;
 using NerdStore.WebAPI.Core.Facilities;
 using System;
@@ -39,7 +40,7 @@ namespace NerdStore.ShoppingCart.API.Controllers.v1
         }
 
         [HttpPost("cart/items")]
-        public async Task<IActionResult> AddShoppingCartItem(Entities.ShoppingCartItem item)
+        public async Task<IActionResult> AddShoppingCartItem(ShoppingCartItem item)
         {
             var shoppingCart = await GetShoppingCartCustomer();
 
@@ -73,14 +74,13 @@ namespace NerdStore.ShoppingCart.API.Controllers.v1
             if (!IsValidOperation())
                 return CustomResponse();
 
-            if (await _shoppingContext.SaveChangesAsync() <= 0)
-                AddError("Não foi possível salvar as alterações!");
+            await PersistData();
 
             return CustomResponse();
         }
 
         [HttpPut("cart/items/{productId:guid}")]
-        public async Task<IActionResult> UpdateShoppingCartItem(Guid productId, Entities.ShoppingCartItem shoppingCartItemUpdated)
+        public async Task<IActionResult> UpdateShoppingCartItem(Guid productId, ShoppingCartItem shoppingCartItemUpdated)
         {
             var shoppingCart = await GetShoppingCartCustomer();
             var shoppingCartItem = await GetItemFromShoppingCart(productId, shoppingCart, shoppingCartItemUpdated);
@@ -96,8 +96,7 @@ namespace NerdStore.ShoppingCart.API.Controllers.v1
             _shoppingContext.ShoppingCartItems.Update(shoppingCartItem);
             _shoppingContext.ShoppingCarts.Update(shoppingCart);
 
-            if (await _shoppingContext.SaveChangesAsync() <= 0)
-                AddError("Não foi possível salvar as alterações!");
+            await PersistData();
 
             return CustomResponse();
         }
@@ -119,8 +118,22 @@ namespace NerdStore.ShoppingCart.API.Controllers.v1
             _shoppingContext.ShoppingCartItems.Remove(shoppingCartItem);
             _shoppingContext.ShoppingCarts.Update(shoppingCart);
 
-            if (await _shoppingContext.SaveChangesAsync() <= 0)
-                AddError("Não foi possível salvar as alterações!");
+            await PersistData();
+
+            return CustomResponse();
+        }
+
+        [HttpPost]
+        [Route("cart/apply-voucher")]
+        public async Task<IActionResult> ApplyVoucher(Voucher voucher)
+        {
+            var shoppingCart = await GetShoppingCartCustomer();
+
+            shoppingCart.ApplyVoucher(voucher);
+
+            _shoppingContext.ShoppingCarts.Update(shoppingCart);
+
+            await PersistData();
 
             return CustomResponse();
         }
@@ -133,7 +146,7 @@ namespace NerdStore.ShoppingCart.API.Controllers.v1
                 .FirstOrDefaultAsync(c => c.CustomerId == _aspNetUser.GetUserId());
         }
 
-        private async Task<Entities.ShoppingCartItem> GetItemFromShoppingCart(Guid productId, Entities.ShoppingCart shoppingCart, Entities.ShoppingCartItem item = null)
+        private async Task<ShoppingCartItem> GetItemFromShoppingCart(Guid productId, Entities.ShoppingCart shoppingCart, ShoppingCartItem item = null)
         {
             if (shoppingCart == null)
             {
@@ -175,6 +188,12 @@ namespace NerdStore.ShoppingCart.API.Controllers.v1
                 .ForEach(e => AddError(e.ErrorMessage));
             
             return false;
+        }
+
+        private async Task PersistData()
+        {
+            if (await _shoppingContext.SaveChangesAsync() <= 0)
+                AddError("Não foi possível salvar as alterações!");
         }
     }
 }

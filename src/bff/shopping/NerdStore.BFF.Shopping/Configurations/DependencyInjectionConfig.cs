@@ -29,6 +29,11 @@ namespace NerdStore.BFF.Shopping.Configurations
                 .AddPolicyHandler(PollyConfig.WaitAndRetryConfig())
                 .AddTransientHttpErrorPolicy(PollyConfig.CircuitBreakerConfig);
 
+            services.AddHttpClient<IOrderService, OrderService>()
+                .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>()
+                .AddPolicyHandler(PollyConfig.WaitAndRetryConfig())
+                .AddTransientHttpErrorPolicy(PollyConfig.CircuitBreakerConfig);
+
             return services;
         }
     }

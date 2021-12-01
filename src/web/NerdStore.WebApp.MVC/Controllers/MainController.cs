@@ -6,7 +6,7 @@ namespace NerdStore.WebApp.MVC.Controllers
 {
     public class MainController : Controller
     {
-        protected bool ResponseHasErros(ResponseResult response)
+        protected bool ResponseHasErrors(ResponseResult response)
         {
             if (response != null && response.Errors.Messages.Any())
             {

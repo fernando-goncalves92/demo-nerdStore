@@ -62,5 +62,15 @@ namespace NerdStore.BFF.Shopping.Services.ShoppingCart
 
             return Ok();
         }
+
+        public async Task<ResponseResult> ApplyVoucher(VoucherDto voucher)
+        {
+            var response = await _httpClient.PostAsync("/api/v1/shopping/cart/apply-voucher", ConvertToStringContent(voucher));
+
+            if (!IsSuccessResponseStatusCode(response)) 
+                return await GetResponse<ResponseResult>(response);
+
+            return Ok();
+        }
     }
 }

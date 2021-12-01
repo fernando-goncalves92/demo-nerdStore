@@ -64,6 +64,16 @@ namespace NerdStore.ShoppingCart.API.Data
                 .WithOne(s => s.ShoppingCart)
                 .HasForeignKey(c => c.ShoppingCartId);
 
+            modelBuilder.Entity<Entities.ShoppingCart>()
+                .Ignore(c => c.Voucher)
+                .OwnsOne(c => c.Voucher, v =>
+                {
+                    v.Property(vc => vc.Code).HasColumnName("VoucherCode").HasColumnType("VARCHAR(50)");
+                    v.Property(vc => vc.DiscountType).HasColumnName("DiscountType");
+                    v.Property(vc => vc.DiscountPercentage).HasColumnName("DiscountPercentage");
+                    v.Property(vc => vc.DiscountAmount).HasColumnName("DiscountAmount");
+                });
+
             modelBuilder.Entity<ShoppingCartItem>()
                 .ToTable("ShoppingCartItem");
         }

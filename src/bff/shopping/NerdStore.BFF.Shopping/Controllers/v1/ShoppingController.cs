@@ -1,30 +1,36 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NerdStore.BFF.Shopping.Models;
 using NerdStore.BFF.Shopping.Services.Catalog;
 using NerdStore.BFF.Shopping.Services.ShoppingCart;
 using NerdStore.WebAPI.Core.Controllers;
 using NerdStore.WebAPI.Core.Facilities;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace NerdStore.BFF.Shopping.API.Controllers.v1
 {
     [ApiVersion("1.0")]
-    [Authorize]
+    //[Authorize]
     [Route("api/v{version:apiVersion}/[controller]")]
     public class ShoppingController : MainController
     {
         private readonly IAspNetUser _aspNetUser;
         private readonly IShoppingCartService _shoppingCartService;
         private readonly ICatalogService _catalogService;
+        private readonly IOrderService _orderService;
 
-        public ShoppingController(IAspNetUser aspNetUser, IShoppingCartService shoppingCartService, ICatalogService catalogService)
+        public ShoppingController(
+            IAspNetUser aspNetUser, 
+            IShoppingCartService shoppingCartService, 
+            ICatalogService catalogService,
+            IOrderService orderService)
         {
             _aspNetUser = aspNetUser;
             _shoppingCartService = shoppingCartService;
             _catalogService = catalogService;
+            _orderService = orderService;
         }
 
         [HttpGet("cart")]
@@ -88,6 +94,21 @@ namespace NerdStore.BFF.Shopping.API.Controllers.v1
             }
 
             return CustomResponse(await _shoppingCartService.RemoveItem(productId));
+        }
+
+        [HttpPost("cart/apply-voucher")]        
+        public async Task<IActionResult> ApplyVoucher([FromBody] string voucherCode)
+        {
+            var voucher = await _orderService.GetVoucherByCode(voucherCode);
+            
+            if (voucher is null)
+            {
+                AddError("O voucher informado é inválido!");
+                
+                return CustomResponse();
+            }
+
+            return CustomResponse(await _shoppingCartService.ApplyVoucher(voucher));
         }
 
         private async Task ValidateShoppingCartItem(ProductDto product, int amount, bool addProduct = false)

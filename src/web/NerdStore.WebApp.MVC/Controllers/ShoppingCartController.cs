@@ -28,7 +28,7 @@ namespace NerdStore.WebApp.MVC.Controllers
         {
             var response = await _shoppingBffService.AddItem(item);
 
-            if (ResponseHasErros(response))
+            if (ResponseHasErrors(response))
                 return View("Index", await _shoppingBffService.GetShoppingCart());
 
             return RedirectToAction("Index");
@@ -40,7 +40,7 @@ namespace NerdStore.WebApp.MVC.Controllers
             var item = new ShoppingCartItemViewModel { ProductId = productId, Amount = amount };
             var response = await _shoppingBffService.UpdateItem(productId, item);
 
-            if (ResponseHasErros(response))
+            if (ResponseHasErrors(response))
                 return View("Index", await _shoppingBffService.GetShoppingCart());
 
             return RedirectToAction("Index");
@@ -51,7 +51,18 @@ namespace NerdStore.WebApp.MVC.Controllers
         {
             var response = await _shoppingBffService.RemoveItem(productId);
 
-            if (ResponseHasErros(response)) 
+            if (ResponseHasErrors(response)) 
+                return View("Index", await _shoppingBffService.GetShoppingCart());
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost("apply-voucher")]
+        public async Task<IActionResult> ApplyVoucher(string voucherCode)
+        {
+            var response = await _shoppingBffService.ApplyVoucher(voucherCode);
+
+            if (ResponseHasErrors(response)) 
                 return View("Index", await _shoppingBffService.GetShoppingCart());
 
             return RedirectToAction("Index");

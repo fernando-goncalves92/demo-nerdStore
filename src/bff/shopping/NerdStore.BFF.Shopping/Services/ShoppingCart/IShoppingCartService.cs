@@ -11,5 +11,6 @@ namespace NerdStore.BFF.Shopping.Services.ShoppingCart
         Task<ResponseResult> AddItem(ShoppingCartItemDto item);
         Task<ResponseResult> UpdateItem(Guid productId, ShoppingCartItemDto item);
         Task<ResponseResult> RemoveItem(Guid productId);
+        Task<ResponseResult> ApplyVoucher(VoucherDto voucher);
     }
 }
