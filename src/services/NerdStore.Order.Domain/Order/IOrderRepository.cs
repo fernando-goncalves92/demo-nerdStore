@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using NerdStore.Core.Data.Interfaces;
+using System.Data.Common;
 
 namespace NerdStore.Order.Domain.Order
 {
@@ -12,7 +13,7 @@ namespace NerdStore.Order.Domain.Order
         void Add(Order order);
         void Update(Order order);
         
-        //DbConnection ObterConexao();
+        DbConnection GetConnection();
 
         Task<OrderItem> GetOrdemItemById(Guid id);
         Task<OrderItem> GetOrdemItemByOrderAndProductId(Guid orderId, Guid productId);

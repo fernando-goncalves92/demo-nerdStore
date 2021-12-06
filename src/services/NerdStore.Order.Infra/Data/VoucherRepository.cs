@@ -22,6 +22,11 @@ namespace NerdStore.Order.Infra.Data
             return await _context.Vouchers.FirstOrDefaultAsync(v => v.Code == code);
         }
 
+        public void Update(Voucher voucher)
+        {
+            _context.Vouchers.Update(voucher);
+        }
+
         public void Dispose()
         {
             _context.Dispose();

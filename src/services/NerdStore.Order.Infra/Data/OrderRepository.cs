@@ -3,6 +3,7 @@ using NerdStore.Core.Data.Interfaces;
 using NerdStore.Order.Domain.Order;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -55,6 +56,11 @@ namespace NerdStore.Order.Infra.Data
                 .AsNoTracking()
                 .Where(p => p.CustomerId == customerId)
                 .ToListAsync();
+        }
+
+        public DbConnection GetConnection()
+        {
+            return _context.Database.GetDbConnection();
         }
 
         public void Dispose()
