@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NerdStore.Customer.API.Configurations;
+using NerdStore.MessageBus;
 using NerdStore.Order.API.Configurations;
 using NerdStore.WebAPI.Core.Jwt;
 
@@ -33,6 +34,7 @@ namespace NerdStore.Order.API
             services.AddSwaggerConfig();
             services.AddMediatR(typeof(Startup));
             services.AddDependencyInjection(Configuration);
+            services.AddRabbitMQMessageBusConfig(Configuration);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)

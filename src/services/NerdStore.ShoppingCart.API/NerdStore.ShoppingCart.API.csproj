@@ -23,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\building blocks\NerdStore.MessageBus\NerdStore.MessageBus.csproj" />
     <ProjectReference Include="..\..\building blocks\NerdStore.WebAPI.Core\NerdStore.WebAPI.Core.csproj" />
   </ItemGroup>
 

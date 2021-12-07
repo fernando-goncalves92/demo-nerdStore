@@ -16,12 +16,12 @@ namespace NerdStore.ShoppingCart.API.Controllers.v1
     [Route("api/v{version:apiVersion}/[controller]")]
     public class ShoppingController : MainController
     {
-        private readonly IAspNetUser _aspNetUser;
+        private readonly IAspNetUser _user;
         private readonly ShoppingContext _shoppingContext;
 
-        public ShoppingController(IAspNetUser aspNetUser, ShoppingContext shoppingContext)
+        public ShoppingController(IAspNetUser user, ShoppingContext shoppingContext)
         {
-            _aspNetUser = aspNetUser;
+            _user = user;
             _shoppingContext = shoppingContext;
         }
 
@@ -46,7 +46,7 @@ namespace NerdStore.ShoppingCart.API.Controllers.v1
 
             if (shoppingCart == null)
             {
-                shoppingCart = new Entities.ShoppingCart(_aspNetUser.GetUserId());
+                shoppingCart = new Entities.ShoppingCart(_user.GetUserId());
                 shoppingCart.AddItem(item);
 
                 if (!IsShoppingCartValid(shoppingCart))
@@ -143,7 +143,7 @@ namespace NerdStore.ShoppingCart.API.Controllers.v1
             return await _shoppingContext
                 .ShoppingCarts
                 .Include(s => s.Items)
-                .FirstOrDefaultAsync(c => c.CustomerId == _aspNetUser.GetUserId());
+                .FirstOrDefaultAsync(c => c.CustomerId == _user.GetUserId());
         }
 
         private async Task<ShoppingCartItem> GetItemFromShoppingCart(Guid productId, Entities.ShoppingCart shoppingCart, ShoppingCartItem item = null)

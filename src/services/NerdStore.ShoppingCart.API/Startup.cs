@@ -4,7 +4,9 @@ using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using NerdStore.MessageBus;
 using NerdStore.ShoppingCart.API.Configurations;
+using NerdStore.ShoppingCart.API.IntegrationServices;
 using NerdStore.WebAPI.Core.Jwt;
 
 namespace NerdStore.ShoppingCart.API
@@ -30,6 +32,9 @@ namespace NerdStore.ShoppingCart.API
             services.AddSwaggerConfig();
             services.AddJwtConfig(Configuration);
             services.AddApiConfig();
+            services.AddRabbitMQMessageBusConfig(Configuration);
+            services.AddBackgroundServices();
+            
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)

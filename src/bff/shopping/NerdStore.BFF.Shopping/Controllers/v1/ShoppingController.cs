@@ -12,22 +12,22 @@ using NerdStore.WebAPI.Core.Facilities;
 namespace NerdStore.BFF.Shopping.API.Controllers.v1
 {
     [ApiVersion("1.0")]
-    //[Authorize]
+    [Authorize]
     [Route("api/v{version:apiVersion}/[controller]")]
     public class ShoppingController : MainController
     {
-        private readonly IAspNetUser _aspNetUser;
+        private readonly IAspNetUser _user;
         private readonly IShoppingCartService _shoppingCartService;
         private readonly ICatalogService _catalogService;
         private readonly IOrderService _orderService;
 
         public ShoppingController(
-            IAspNetUser aspNetUser, 
+            IAspNetUser user, 
             IShoppingCartService shoppingCartService, 
             ICatalogService catalogService,
             IOrderService orderService)
         {
-            _aspNetUser = aspNetUser;
+            _user = user;
             _shoppingCartService = shoppingCartService;
             _catalogService = catalogService;
             _orderService = orderService;

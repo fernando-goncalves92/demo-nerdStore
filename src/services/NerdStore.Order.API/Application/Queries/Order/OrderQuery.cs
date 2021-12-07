@@ -56,7 +56,7 @@ namespace NerdStore.Order.API.Application.Queries.Order
                                     OrderItem OI ON O.Id = OI.OrderId 
                                 WHERE 
                                     O.CustomerId = @customerId 
-                                AND O.RegistrationDate between DATEADD(minute, -3,  GETDATE()) and GETDATE()
+                                AND O.RegistrationDate between DATEADD(MINUTE, -3,  GETDATE()) and GETDATE()
                                 AND O.OrderStatus = 1 
                                 ORDER BY 
                                     O.RegistrationDate DESC";
