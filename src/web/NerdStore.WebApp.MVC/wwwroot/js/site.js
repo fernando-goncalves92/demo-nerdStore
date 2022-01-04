@@ -3,14 +3,14 @@
 
         function limpa_formulário_cep() {
             // Limpa valores do formulário de cep.
-            $("#Endereco_Logradouro").val("");
-            $("#Endereco_Bairro").val("");
-            $("#Endereco_Cidade").val("");
-            $("#Endereco_Estado").val("");
+            $("#Address_Street").val("");
+            $("#Address_District").val("");
+            $("#Address_City").val("");
+            $("#Address_State").val("");
         }
 
         //Quando o campo cep perde o foco.
-        $("#Endereco_Cep").blur(function () {
+        $("#Address_ZipCode").blur(function () {
 
             //Nova variável "cep" somente com dígitos.
             var cep = $(this).val().replace(/\D/g, '');
@@ -25,10 +25,10 @@
                 if (validacep.test(cep)) {
 
                     //Preenche os campos com "..." enquanto consulta webservice.
-                    $("#Endereco_Logradouro").val("...");
-                    $("#Endereco_Bairro").val("...");
-                    $("#Endereco_Cidade").val("...");
-                    $("#Endereco_Estado").val("...");
+                    $("#Address_Street").val("...");
+                    $("#Address_District").val("...");
+                    $("#Address_City").val("...");
+                    $("#Address_State").val("...");
 
                     //Consulta o webservice viacep.com.br/
                     $.getJSON("https://viacep.com.br/ws/" + cep + "/json/?callback=?",
@@ -36,10 +36,10 @@
 
                             if (!("erro" in dados)) {
                                 //Atualiza os campos com os valores da consulta.
-                                $("#Endereco_Logradouro").val(dados.logradouro);
-                                $("#Endereco_Bairro").val(dados.bairro);
-                                $("#Endereco_Cidade").val(dados.localidade);
-                                $("#Endereco_Estado").val(dados.uf);
+                                $("#Address_Street").val(dados.logradouro);
+                                $("#Address_District").val(dados.bairro);
+                                $("#Address_City").val(dados.localidade);
+                                $("#Address_State").val(dados.uf);
                             } //end if.
                             else {
                                 //CEP pesquisado não foi encontrado.

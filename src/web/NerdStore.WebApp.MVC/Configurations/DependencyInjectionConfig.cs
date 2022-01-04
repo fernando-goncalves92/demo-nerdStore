@@ -5,6 +5,7 @@ using NerdStore.WebAPI.Core.Polly;
 using NerdStore.WebApp.MVC.DelegatingHandlers;
 using NerdStore.WebApp.MVC.Services.Authentication;
 using NerdStore.WebApp.MVC.Services.Catalog;
+using NerdStore.WebApp.MVC.Services.Customer;
 using NerdStore.WebApp.MVC.Services.ShoppingBff;
 
 namespace NerdStore.WebApp.MVC.Configurations
@@ -29,6 +30,11 @@ namespace NerdStore.WebApp.MVC.Configurations
                 .AddTransientHttpErrorPolicy(PollyConfig.CircuitBreakerConfig);
 
             services.AddHttpClient<IShoppingBffService, ShoppingBffService>()
+                .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>()
+                .AddPolicyHandler(PollyConfig.WaitAndRetryConfig())
+                .AddTransientHttpErrorPolicy(PollyConfig.CircuitBreakerConfig);
+
+            services.AddHttpClient<ICustomerService, CustomerService>()
                 .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>()
                 .AddPolicyHandler(PollyConfig.WaitAndRetryConfig())
                 .AddTransientHttpErrorPolicy(PollyConfig.CircuitBreakerConfig);

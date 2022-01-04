@@ -21,9 +21,14 @@ namespace NerdStore.WebApp.MVC.Extensions
             return builder.ToString();
         }
 
-        public static string CurrencyFormat(this RazorPage page, decimal value)
+        public static string CurrencyFormat(this RazorPage page, decimal price)
         {
-            return string.Format(Thread.CurrentThread.CurrentCulture, "{0:C}", value);
+            return string.Format(Thread.CurrentThread.CurrentCulture, "{0:C}", price);
+        }
+
+        private static string CurrencyFormat(decimal price)
+        {
+            return string.Format(Thread.CurrentThread.CurrentCulture, "{0:C}", price);
         }
 
         public static string StockMessage(this RazorPage page, int amount)
@@ -51,6 +56,43 @@ namespace NerdStore.WebApp.MVC.Extensions
             }
 
             return stringBuilder.ToString();
+        }
+
+        public static string UnitPerProductTotalPurchase(this RazorPage page, int amount, decimal price)
+        {
+            return $"{amount}x {CurrencyFormat(price)} = Total: {CurrencyFormat(price * amount)}";
+        }
+
+        public static string ShowStatus(this RazorPage page, int status)
+        {
+            var statusMessage = "";
+            var statusClass = "";
+
+            switch (status)
+            {
+                case 1:
+                    statusClass = "info";
+                    statusMessage = "Em aprovação";
+                    break;
+                case 2:
+                    statusClass = "primary";
+                    statusMessage = "Aprovado";
+                    break;
+                case 3:
+                    statusClass = "danger";
+                    statusMessage = "Recusado";
+                    break;
+                case 4:
+                    statusClass = "success";
+                    statusMessage = "Entregue";
+                    break;
+                case 5:
+                    statusClass = "warning";
+                    statusMessage = "Cancelado";
+                    break;
+            }
+
+            return $"<span class='badge badge-{statusClass}'>{statusMessage}</span>";
         }
     }
 }

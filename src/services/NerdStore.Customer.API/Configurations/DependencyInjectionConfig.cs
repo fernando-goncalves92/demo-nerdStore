@@ -19,7 +19,6 @@ namespace NerdStore.Customer.API.Configurations
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             
             services.AddScoped<IAspNetUser, AspNetUser>();
-            services.AddScoped<CustomerDbContext>();
             services.AddScoped<IMediatorHandler, MediatorHandler>();
             services.AddScoped<IRequestHandler<AddCustomerCommand, ValidationResult>, CustomerCommandHandler>();
             services.AddScoped<IRequestHandler<AddCustomerAddressCommand, ValidationResult>, CustomerCommandHandler>();

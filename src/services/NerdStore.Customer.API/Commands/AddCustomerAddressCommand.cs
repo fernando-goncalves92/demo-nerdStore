@@ -15,6 +15,8 @@ namespace NerdStore.Customer.API.Commands
         public string City { get; set; }
         public string State { get; set; }
 
+        public AddCustomerAddressCommand() {}
+
         public AddCustomerAddressCommand(
             Guid clienteId, 
             string street, 

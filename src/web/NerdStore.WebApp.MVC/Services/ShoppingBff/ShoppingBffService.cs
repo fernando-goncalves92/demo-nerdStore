@@ -5,6 +5,8 @@ using Microsoft.Extensions.Options;
 using NerdStore.WebApp.MVC.Facilities;
 using NerdStore.Core.Communication;
 using NerdStore.WebApp.MVC.Models.ShoppingCart;
+using NerdStore.WebApp.MVC.Models.Order;
+using System.Collections.Generic;
 
 namespace NerdStore.WebApp.MVC.Services.ShoppingBff
 {
@@ -76,6 +78,63 @@ namespace NerdStore.WebApp.MVC.Services.ShoppingBff
                 return await GetResponse<ResponseResult>(response);
 
             return Ok();
+        }
+
+        public async Task<ResponseResult> FinishOrder(OrderTransactionViewModel orderTransaction)
+        {
+            var orderContent = ConvertToStringContent(orderTransaction);
+            var response = await _httpClient.PostAsync("/api/v1/shopping/order/", orderContent);
+
+            if (!IsSuccessResponseStatusCode(response)) 
+                return await GetResponse<ResponseResult>(response);
+
+            return Ok();
+        }
+
+        public async Task<OrderViewModel> GetLastOrder()
+        {
+            var response = await _httpClient.GetAsync("/api/v1/shopping/order/last/");
+
+            IsSuccessResponseStatusCode(response);
+
+            return await GetResponse<OrderViewModel>(response);
+        }
+
+        public async Task<IEnumerable<OrderViewModel>> GetOrdersByCustomerId()
+        {
+            var response = await _httpClient.GetAsync("/api/v1/shopping/order/customer-list");
+
+            IsSuccessResponseStatusCode(response);
+
+            return await GetResponse<IEnumerable<OrderViewModel>>(response);
+        }
+
+        public OrderTransactionViewModel MapToOrderTransaction(ShoppingCartViewModel shoppingCart, AddressViewModel address)
+        {
+            var orderTransaction = new OrderTransactionViewModel
+            {
+                TotalPurchase = shoppingCart.TotalPurchase,
+                ShoppingCartItems = shoppingCart.Items,
+                Discount = shoppingCart.Discount,
+                VoucherUsed = shoppingCart.VoucherUsed,
+                VoucherCode = shoppingCart.Voucher?.Code
+            };
+
+            if (address != null)
+            {
+                orderTransaction.Address = new AddressViewModel
+                {
+                    Street = address.Street,
+                    Number = address.Number,
+                    District = address.District,
+                    ZipCode = address.ZipCode,
+                    Complement = address.Complement,
+                    City = address.City,
+                    State = address.State
+                };
+            }
+
+            return orderTransaction;
         }
     }
 }

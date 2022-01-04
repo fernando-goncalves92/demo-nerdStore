@@ -11,6 +11,8 @@ namespace NerdStore.Customer.API.Commands
         public string Email { get; private set; }
         public string Cpf { get; private set; }
 
+        public AddCustomerCommand() {}
+
         public AddCustomerCommand(Guid id, string name, string email, string cpf)
         {
             AggregateId = id;

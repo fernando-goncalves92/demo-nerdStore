@@ -29,9 +29,9 @@ namespace NerdStore.Customer.API.Data
             _context.Addresses.Add(address);
         }
 
-        public Task<Address> GetAddressById(Guid id)
+        public async Task<Address> GetAddressById(Guid id)
         {
-            throw new NotImplementedException();
+            return await _context.Addresses.FirstOrDefaultAsync(e => e.CustomerId == id);
         }
 
         public async Task<IEnumerable<Entities.Customer>> GetAll()
